@@ -32,7 +32,7 @@ class player():
              self.__pv = self.__pv + modif
 
     def __set_lvl(self, value):
-        self.__lvl += 1
+        self.__lvl += value
 
     def __set_etat(self, new_etat):
         self.__etat = new_etat
@@ -53,12 +53,14 @@ class player():
     def heal(self, target):
         soin = self.get_lvl()
 
-        if(target.get_etat() == "MORT"):
+        if(target.get_etat() == "mort"):
             print("impossible de soigner les morts")
         
         else:
 
             if (target.get_pv() + soin >= 1000):
+                print("le joueur a déjà tous ses points de vie")
+
                 target.__set_pv(type=None, modif = 1000)
             else:
                 target.__set_pv(type="heal", modif=soin)
