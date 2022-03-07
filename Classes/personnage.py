@@ -3,7 +3,7 @@ class player():
         self.__name = name
         self.__pv = 1000
         self.__lvl = 1
-        self.__etat = "vivants"
+        self.__etat = "vivant"
 
     def info(self):
         info = f"name: {self.__name:20}\npv: {self.__pv:6}\nlvl: {self.__lvl:2}\netat: {self.__etat:10}"
