@@ -3,7 +3,7 @@ class player():
         self.__name = name
         self.__pv = 1000
         self.__lvl = 1
-        self.__etat = "vivant"
+        self.__etat = "vivants"
 
     def info(self):
         info = f"name: {self.__name:20}\npv: {self.__pv:6}\nlvl: {self.__lvl:2}\netat: {self.__etat:10}"
@@ -25,10 +25,10 @@ class player():
         if (type == None):
             self.__pv = modif
 
-        if(type == "dmg"):
+        elif(type == "dmg"):
             self.__pv = self.__pv - modif
 
-        else: 
+        elif(type == "heal"): 
              self.__pv = self.__pv + modif
 
     def __set_lvl(self, value):
@@ -42,22 +42,23 @@ class player():
 
         if (dmg < target.get_pv()):
             target.__set_pv("dmg", dmg)
-            print(f"{self.get_name()} infige {dmg} dommages à {target.get_name()}")
+            print(f"{self.get_name()} inflige {dmg} dommages à {target.get_name()}")
         else:
-            target.__set_pv(0)
+            target.__set_pv(modif = 0)
             target.__set_etat("mort")
             self.__set_lvl(1)
             print(f"{target.get_name()} est mort sous les coups de {self.get_name()}")
             print(f"{self.get_name()} gagne 1 niveau")
 
     def heal(self, target):
-        heal = self.get_lvl()
+        soin = self.get_lvl()
 
         if(target.get_etat() == "MORT"):
             print("impossible de soigner les morts")
         
         else:
-            if (target.get_pv() + heal >= 1000):
-                target.set_pv(1000)
+
+            if (target.get_pv() + soin >= 1000):
+                target.__set_pv(type=None, modif = 1000)
             else:
-                target.set_pv("heal", heal)
+                target.__set_pv(type="heal", modif=soin)
